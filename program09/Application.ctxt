@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Application
+comment0.text=\r\n\ \ Application\ launcher\ for\ JTetris,\ Program\ 09.\r\n\r\n\ \ @author\ Stephen\ Edwards\r\n\ \ @version\ 2021.10.28\r\n
+comment1.params=
+comment1.target=Application()
+comment1.text=\r\n\ Initializes\ a\ newly\ created\ Application\ object.\r\n
+comment2.params=
+comment2.target=void\ run()
+comment2.text=\r\n\ Launches\ the\ JTetris\ graphical\ user\ interface\ to\ play\ the\ game.\r\n
+numComments=3

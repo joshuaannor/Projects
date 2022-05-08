@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=CleverBrainTest
+comment0.text=\r\n\ testing\ the\ Clever\ class\r\n\ \ @author\ Joshua\ Annor\ (906390831)\r\n\ \ @version\ (2022.04.05)\r\n
+comment1.params=
+comment1.target=CleverBrainTest()
+comment1.text=\r\n\ Creates\ a\ new\ CleverBrainTest\ test\ object.\r\n
+comment2.params=
+comment2.target=void\ setUp()
+comment2.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\ Called\ before\ every\ test\ case\ method.\r\n
+comment3.params=
+comment3.target=void\ testRateBoardOnRow0()
+comment3.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\ Called\ before\ every\ test\ case\ method\ testRateBoard.\r\n
+comment4.params=
+comment4.target=void\ testLonRow0()
+comment4.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\ Called\ before\ every\ test\ case\ method\ bestMove.\r\n
+numComments=5

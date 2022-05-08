@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=CleverBrain
+comment0.text=\ \ \ \ \ \ \ \ \ \ \r\n\ \ Writing\ a\ brain\ class\ called\ cleverBrain\ that\ is\ smarter\r\n\ \ then\ lame\ brain\ \ \ \ \ \ \ \ \ \r\n\ \ @author\ Joshua\ Annor\ (906390831)\ \ \ \ \ \ \ \ \ \ \r\n\ \ @version\ (2022.04.01)\ \ \ \ \ \ \ \ \ \ \r\n
+comment1.params=
+comment1.target=CleverBrain()
+comment1.text=\ \ \ \ \ \ \ \ \ \ \r\n\ Initializes\ a\ newly\ created\ CleverBrain\ object.\ \ \ \ \ \ \ \ \ \ \r\n
+comment2.params=board
+comment2.target=double\ rateColumn(student.tetris.Board)
+comment2.text=\ \ \ \ \ \ \ \ \ \ \r\n\ Initializes\ a\ newly\ created\ CleverBrain\ object.\ \ \r\n\ @param\ board\ is\ a\ Board\ \ \ \ \r\n\ @return\ totalWidth\ \ \ \ \ \ \ \ \ \ \r\n
+comment3.params=board
+comment3.target=double\ rateRow(student.tetris.Board)
+comment3.text=\ \ \ \ \ \ \ \ \ \ \r\n\ Initializes\ a\ newly\ created\ CleverBrain\ object.\ \ \ \ \ \ \ \ \ \ \r\n\ @param\ board\ is\ a\ Board\ \ \ \ \ \ \ \ \ \ \ \r\n\ @return\ totalWidth\ \ \ \ \ \ \ \ \ \ \r\n
+comment4.params=board\ piece\ heightLimit
+comment4.target=student.tetris.Move\ bestMove(student.tetris.Board,\ student.tetris.Piece,\ int)
+comment4.text=\ \ \ \ \ \ \ \ \ \ \r\n\ Initializes\ a\ newly\ created\ CleverBrain\ object.\ \ \ \ \ \ \ \ \ \ \r\n\ @param\ board\ is\ a\ Board\ \ \ \ \ \ \ \ \ \ \ \r\n\ @param\ piece\ is\ a\ Peice\ \ \ \ \ \ \ \ \ \ \r\n\ @param\ heightLimit\ is\ a\ int\ \ \ \ \ \ \ \ \ \ \r\n\ @return\ Move\ \ \ \ \ \ \ \ \ \ \r\n
+comment5.params=board
+comment5.target=double\ rateBoard(student.tetris.Board)
+comment5.text=\ \ \ \ \ \ \ \ \ \ \r\n\ Initializes\ a\ newly\ created\ CleverBrain\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \r\n\ @param\ board\ \ \ \ \ \ \ \ \ \r\n\ @return\ rating\ \ \ \ \ \ \ \ \ \ \r\n
+numComments=6
