@@ -1,11 +1,5 @@
 import yaml
 
-# Custom constructor for handling '!value' tags
-def value_constructor(loader, node):
-    return loader.construct_scalar(node)
-
-yaml.SafeLoader.add_constructor(u'!value', value_constructor)
-
 # Load keys from the example.txt file
 keys_to_replace = []
 with open("example.txt", "r") as key_file:
@@ -15,55 +9,17 @@ with open("example.txt", "r") as key_file:
 with open('j.yaml', 'r') as file:
     data = yaml.safe_load(file)
 
-print("Original YAML data:", data)
-
-# This will hold our new data
-new_data = []
-
-# Flag to check if we found a key and need to replace the next value
-replace_next_value = False
-replacement_key = ''
-
-# Iterate through the key-value pairs
-for i, (key, value) in enumerate(data.items()):
-    # If we find a key from our list, set the flag
-    if key == "key" and value in keys_to_replace:
-        print(f"Found key to replace: {value}")
-        replace_next_value = True
-        replacement_key = value
-    # If the flag is set and we find a 'value' key, replace its value
-    if key == "value" and replace_next_value:
-        print(f"Replacing value for key {replacement_key} with {{{{{replacement_key}}}}}")
-        new_data.append(("value", "{{" + replacement_key + "}}"))
-        replace_next_value = False
-    else:
-        new_data.append((key, value))
-
-# Convert list of tuples back to dictionary
-output_data = dict(new_data)
-
-print("Updated YAML data:", output_data)
+# Iterate through the list of dictionaries
+for item in data:
+    # Check if the current dictionary has both 'key' and 'value' keys
+    if 'key' in item and 'value' in item:
+        # If the key is one we want to replace
+        if item['key'] in keys_to_replace:
+            print(f"Replacing value for key {item['key']} with {{{{{item['key']}}}}}")
+            item['value'] = f"{{{{{item['key']}}}}}"
 
 # Save the updated YAML data to a new file
 with open('output2.0.yaml', 'w') as file:
-    yaml.dump(output_data, file, default_flow_style=False)
+    yaml.dump(data, file, default_flow_style=False)
 
 print("Replacements are done and 'output2.0.yaml' is created!")
-
-
-
-
-key: wf_triggerexample
-    showOnReleaseStart: false
-    type: xlrelease.StringVariable
-    value: joshywashy.com:80
-  - description: specify hostname and port where polling service is running in form
-      <hostname:port>.
-    key: wf_example
-    showOnReleaseStart: false
-    type: xlrelease.StringVariable
-    value: md-agent-prod.power.ge.com:3577
-  - key: examplekey 5
-    requiresValue: false
-    showOnReleaseStart: false
-    type: xlrelease.StringVariable
