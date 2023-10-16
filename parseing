@@ -1,5 +1,20 @@
 import yaml
 
+# Function to recursively search and replace
+def recursive_search_replace(node, keys_to_replace):
+    # If it's a list, iterate through each item
+    if isinstance(node, list):
+        for item in node:
+            recursive_search_replace(item, keys_to_replace)
+    # If it's a dictionary, look for 'key' and 'value' keys
+    elif isinstance(node, dict):
+        if 'key' in node and 'value' in node and node['key'] in keys_to_replace:
+            print(f"Replacing value for key {node['key']} with {{{{{node['key']}}}}}")
+            node['value'] = f"{{{{{node['key']}}}}}"
+        # Recursively search in nested dictionaries
+        for key in node:
+            recursive_search_replace(node[key], keys_to_replace)
+
 # Load keys from the example.txt file
 keys_to_replace = []
 with open("example.txt", "r") as key_file:
@@ -9,14 +24,8 @@ with open("example.txt", "r") as key_file:
 with open('j.yaml', 'r') as file:
     data = yaml.safe_load(file)
 
-# Iterate through the list of dictionaries
-for item in data:
-    # Check if the current dictionary has both 'key' and 'value' keys
-    if 'key' in item and 'value' in item:
-        # If the key is one we want to replace
-        if item['key'] in keys_to_replace:
-            print(f"Replacing value for key {item['key']} with {{{{{item['key']}}}}}")
-            item['value'] = f"{{{{{item['key']}}}}}"
+# Recursively search and replace
+recursive_search_replace(data, keys_to_replace)
 
 # Save the updated YAML data to a new file
 with open('output2.0.yaml', 'w') as file:
