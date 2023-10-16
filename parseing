@@ -1,4 +1,5 @@
 import yaml
+# Custom constructor for handling '!value' tags
 
 # Load keys from the example.txt file
 keys_to_replace = []
@@ -6,7 +7,7 @@ with open("example.txt", "r") as key_file:
     keys_to_replace = [line.strip() for line in key_file if line.strip()]
 
 # Load the YAML file
-with open('j.yaml', 'r') as file:
+with open('jinput.yaml', 'r') as file:
     data = yaml.safe_load(file)
 
 # This will hold our new data
@@ -19,12 +20,12 @@ replacement_key = ''
 # Iterate through the key-value pairs
 for i, (key, value) in enumerate(data.items()):
     # If we find a key from our list, set the flag
-    if key == "key" and value in keys_to_replace:
+    if key == "key: " and value in keys_to_replace:
         replace_next_value = True
         replacement_key = value
     # If the flag is set and we find a 'value' key, replace its value
-    if key == "value" and replace_next_value:
-        new_data.append(("value", "{{" + replacement_key + "}}"))
+    if key == "value: " and replace_next_value:
+        new_data.append(("value: ", "{{" + replacement_key + "}}"))
         replace_next_value = False
     else:
         new_data.append((key, value))
@@ -37,4 +38,3 @@ with open('output2.0.yaml', 'w') as file:
     yaml.dump(output_data, file, default_flow_style=False)
 
 print("Replacements are done and 'output2.0.yaml' is created!")
-
