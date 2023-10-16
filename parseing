@@ -49,3 +49,21 @@ with open('output2.0.yaml', 'w') as file:
     yaml.dump(output_data, file, default_flow_style=False)
 
 print("Replacements are done and 'output2.0.yaml' is created!")
+
+
+
+
+key: wf_triggerexample
+    showOnReleaseStart: false
+    type: xlrelease.StringVariable
+    value: joshywashy.com:80
+  - description: specify hostname and port where polling service is running in form
+      <hostname:port>.
+    key: wf_example
+    showOnReleaseStart: false
+    type: xlrelease.StringVariable
+    value: md-agent-prod.power.ge.com:3577
+  - key: examplekey 5
+    requiresValue: false
+    showOnReleaseStart: false
+    type: xlrelease.StringVariable
