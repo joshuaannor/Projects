@@ -1,27 +1,35 @@
 import yaml
 
 # Load keys from the example.txt file
+keys = []
 with open('example.txt', 'r') as f:
-    keys = [line.strip() for line in f]
+    keys = [line.strip() for line in f if line.strip()]
+
 # Load the j.yaml file
 with open('j.yaml', 'r') as f:
     data = yaml.safe_load(f)
 
-# Iterate through the yaml data and replace values
-i = 0
-while i < len(data):
-    # Check if current element is a key and if it's in our keys list
-    if list(data.keys())[i] == "key" and data["key"] in keys:
-        key_name = data["key"]
-        # Look ahead for "value" field from current position
-        for j in range(i+1, len(data)):
-            if list(data.keys())[j] == "value":
-                data["value"] = f"{{{{{key_name}}}}}"
-                break
-    i += 1
+# Function to replace values
+def replace_values(data, keys):
+    i = 0
+    while i < len(data):
+        # Check if current element is a key and if it's in our keys list
+        key_field = list(data.keys())[i]
+        if key_field == "key" and data[key_field] in keys:
+            key_name = data[key_field]
+            # Look ahead for "value" field from current position
+            for j in range(i+1, len(data)):
+                value_field = list(data.keys())[j]
+                if value_field == "value":
+                    data[value_field] = f"{{{{{key_name}}}}}"
+                    break
+        i += 1
+    return data
+
+data = replace_values(data, keys)
 
 # Save the updated data back to the yaml file
 with open('output2.0.yaml', 'w') as f:
-    yaml.dump(data, f)
+    yaml.dump(data, f, default_flow_style=False)
 
 print("Replacements are done and 'output2.0.yaml' is created!")
