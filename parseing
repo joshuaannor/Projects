@@ -1,14 +1,21 @@
 import yaml
+
 # Custom constructor for handling '!value' tags
+def value_constructor(loader, node):
+    return loader.construct_scalar(node)
+
+yaml.SafeLoader.add_constructor(u'!value', value_constructor)
 
 # Load keys from the example.txt file
 keys_to_replace = []
 with open("example.txt", "r") as key_file:
     keys_to_replace = [line.strip() for line in key_file if line.strip()]
 
-# Load the YAML file
-with open('jinput.yaml', 'r') as file:
+# Load the YAML file using safe_load
+with open('j.yaml', 'r') as file:
     data = yaml.safe_load(file)
+
+print("Original YAML data:", data)
 
 # This will hold our new data
 new_data = []
@@ -20,18 +27,22 @@ replacement_key = ''
 # Iterate through the key-value pairs
 for i, (key, value) in enumerate(data.items()):
     # If we find a key from our list, set the flag
-    if key == "key: " and value in keys_to_replace:
+    if key == "key" and value in keys_to_replace:
+        print(f"Found key to replace: {value}")
         replace_next_value = True
         replacement_key = value
     # If the flag is set and we find a 'value' key, replace its value
-    if key == "value: " and replace_next_value:
-        new_data.append(("value: ", "{{" + replacement_key + "}}"))
+    if key == "value" and replace_next_value:
+        print(f"Replacing value for key {replacement_key} with {{{{{replacement_key}}}}}")
+        new_data.append(("value", "{{" + replacement_key + "}}"))
         replace_next_value = False
     else:
         new_data.append((key, value))
 
 # Convert list of tuples back to dictionary
 output_data = dict(new_data)
+
+print("Updated YAML data:", output_data)
 
 # Save the updated YAML data to a new file
 with open('output2.0.yaml', 'w') as file:
