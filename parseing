@@ -1,0 +1,58 @@
+import yaml
+
+# Function to format the replacement strings
+def format_replacement(key):
+    return '{{' + key + '}}'
+
+# Function to recursively replace values in a nested dictionary or list
+def recursive_replace(node, keys):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k in keys and isinstance(v, dict) and 'value' in v:
+                print(f"Replacing {v['value']} with {format_replacement(k)}")
+                v['value'] = format_replacement(k)
+            else:
+                recursive_replace(v, keys)
+    elif isinstance(node, list):
+        for i, item in enumerate(node):
+            recursive_replace(item, keys)
+    return node
+
+# List for storing keys from the text file
+keys = []
+
+# Read keys from the text file and store them in the list
+try:
+    with open("example.txt", "r") as var_file:
+        for line in var_file:
+            line = line.strip()
+            if not line:
+                continue
+            keys.append(line)
+except FileNotFoundError:
+    print("The file 'example.txt' was not found.")
+
+# Print the keys for verification
+print("Keys collected from text file:", keys)
+
+# Load the YAML file
+data = None
+try:
+    with open('j.yaml', 'r') as file:
+        data = yaml.safe_load(file)
+except FileNotFoundError:
+    print("The file 'j.yaml' was not found.")
+except yaml.YAMLError as exc:
+    print(f"Error in parsing YAML file: {exc}")
+
+# Check if data is loaded successfully before proceeding
+if data is not None:
+    # Recursively replace the values in the YAML data
+    data = recursive_replace(data, keys)
+
+    # Save the updated YAML data to a new file
+    with open('output2.0.yaml', 'w') as file:
+        yaml.dump(data, file)
+    print("Replacements are done and 'output2.0.yaml' is created!")
+else:
+    print("No data to process.")
