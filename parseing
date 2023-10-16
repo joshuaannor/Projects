@@ -8,7 +8,7 @@ def format_replacement(key):
 def recursive_replace(node, keys):
     if isinstance(node, dict):
         for k, v in node.items():
-            if k in keys and isinstance(v, dict) and 'value' in v:
+            if isinstance(v, dict) and k in keys and 'value' in v:
                 print(f"Replacing {v['value']} with {format_replacement(k)}")
                 v['value'] = format_replacement(k)
             else:
