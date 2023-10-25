@@ -1,0 +1,58 @@
+import re
+
+import yaml
+# Custom constructor for handling '!value' tags
+def value_constructor(loader, node):
+    return loader.construct_scalar(node)
+
+
+yaml.SafeLoader.add_constructor(u'!value', value_constructor)
+
+
+# def str_presenter(dumper, data):
+#     if '{{' in data and '}}' in data:  # Check if data contains {{...}}
+#         return dumper.represent_scalar('tag:yaml.org,2002:str', data, style=None)
+#     return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+
+# yaml.add_representer(str, str_presenter)
+
+# Function to recursively search and replace
+def recursive_search_replace(node, keys_to_replace):
+    # If it's a list, iterate through each item
+    if isinstance(node, list):
+        for item in node:
+            recursive_search_replace(item, keys_to_replace)
+    # If it's a dictionary, look for 'key' and 'value' keys
+    elif isinstance(node, dict):
+        if 'key' in node and 'value' in node and node['key'] in keys_to_replace:
+
+            print(f"Replacing value for key {node['key']} with {{{{{node['key']}}}}}")
+            node['value'] = f"{{{{{node['key']}}}}}"
+        # Recursively search in nested dictionaries
+        for key in node:
+            recursive_search_replace(node[key], keys_to_replace)
+
+# Load keys from the example.txt file
+keys_to_replace = []
+with open("example.txt", "r") as key_file:
+    keys_to_replace = [line.strip() for line in key_file if line.strip()]
+
+# Load the YAML file using safe_load
+with open('input.yaml', 'r') as file:
+    data = yaml.safe_load(file)
+
+# Recursively search and replace
+recursive_search_replace(data, keys_to_replace)
+
+# Save the updated YAML data to a string
+yaml_string = yaml.dump(data, default_style=None)
+
+# Remove single quotes around the double curly braces
+modified_string = re.sub(r"'\{\{", "{{", yaml_string)
+modified_string = re.sub(r"\}\}'", "}}", modified_string)
+
+# Write the modified string to a new file
+with open('output.yaml', 'w') as file:
+    file.write(modified_string)
+
+print("Replacements are done and 'output.yaml' is created!")
