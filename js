@@ -1,6 +1,9 @@
 const http = require('http')
 const fs = require('fs')
-const serviceConfigs = fs.readFileSync('serviceConfigs.json')
+const servicesProd = fs.readFileSync('servicesProd.json')
+const servicesStg = fs.readFileSync('servicesStg.json')
+const servicesQA = fs.readFileSync('servicesQA.json')
+const servicesDev = fs.readFileSync('servicesDev.json')
 const settings = JSON.parse(fs.readFileSync('settings.json'))
 const purecss = fs.readFileSync('./public/pure.css', 'utf8')
 const favicon = fs.readFileSync('./public/favicon.ico')
@@ -19,7 +22,10 @@ function fullURL(serviceEntry) {
     return `http://${serviceEntry.httpOptions.hostname == 'localhost' ? settings.myIp : serviceEntry.httpOptions.hostname}:${serviceEntry.httpOptions.port || 80}${serviceEntry.httpOptions.path}`
 }
 
-let services = addStatusTags(JSON.parse(serviceConfigs))
+let services = addStatusTags(JSON.parse(servicesProd))
+let services2 = addStatusTags(JSON.parse(servicesStg))
+let services3 = addStatusTags(JSON.parse(servicesQA));
+let services4 = addStatusTags(JSON.parse(servicesDev));
 
 function makeRequest(serviceEntry) {
     var req = http.request(serviceEntry.httpOptions, function (res) {
@@ -82,7 +88,7 @@ function genServiceStatusTable(servicesArray) {
     return html.element('table',
         html.element('thead',
             html.element('tr',
-                html.element('th', "Environment") +
+                html.element('th', "Application") +
                 html.element('th', "Service Name") +
                 html.element('th', "Status Code") +
                 html.element('th', "Updated (X ms ago)") +
@@ -93,24 +99,60 @@ function genServiceStatusTable(servicesArray) {
         html.element('tbody', tableRows), { class: "pure-table pure-table-bordered" })
 }
 
-http.createServer((i, o) => {
-    console.log('Request Received')
-    switch (i.url) {
+
+// rest of the new stuff 
+function genNavBar() {
+    return html.element('div',
+        html.element('a', 'PROD', { href: '/', class: 'nav-item' }) +
+        html.element('a', 'STAGING', { href: '/servicesStg', class: 'nav-item' }) +
+        html.element('a', 'QA', { href: '/servicesQA', class: 'nav-item' }) +
+        html.element('a', 'DEV', { href: '/servicesDev', class: 'nav-item' }),
+        { class: 'navbar' }
+    );
+}
+
+
+
+http.createServer((req, res) => {
+
+
+    console.log('Request Received');
+    switch (req.url) {
         case '/favicon.ico':
-            o.setHeader('Content-Type', 'image/x-icon')
-            o.end(favicon)
-            break
+            res.setHeader('Content-Type', 'image/x-icon');
+            res.end(favicon);
+            break;
         case '/data':
-            o.end(JSON.stringify(services, null, 4))
-            break
-        default:
-            let htmlResponse = html.Html(
+            res.end(JSON.stringify(services, null, 4));
+            break;
+        case '/servicesStg':
+            res.end(html.Html(
                 html.Head(html.Style(purecss)) +
-                html.Title("Automation Services") +
-                html.Body(genServiceStatusTable(services))
-            )
-            o.end(htmlResponse)
+                html.Title("servicesStg") +
+                html.Body(genNavBar() + genServiceStatusTable(services2))
+            ));
+            break;
+        case '/servicesQA':
+            res.end(html.Html(
+                html.Head(html.Style(purecss)) +
+                html.Title("servicesQA") +
+                html.Body(genNavBar() + genServiceStatusTable(services3))
+            ));
+            break;
+        case '/servicesDev':
+            res.end(html.Html(
+                html.Head(html.Style(purecss)) +
+                html.Title("servicesDev") +
+                html.Body(genNavBar() + genServiceStatusTable(services4))
+            ));
+            break;
+        default:
+            res.end(html.Html(
+                html.Head(html.Style(purecss)) +
+                html.Title("servicesProd") +
+                html.Body(genNavBar() + genServiceStatusTable(services))
+            ));
     }
 }).listen(settings.httpPort, () => {
-    console.log(`Server running on host http://localhost:${settings.httpPort}`)
-})
+    console.log(`Server running on host http://localhost:${settings.httpPort}`);
+});
