@@ -156,3 +156,35 @@ http.createServer((req, res) => {
 }).listen(settings.httpPort, () => {
     console.log(`Server running on host http://localhost:${settings.httpPort}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function filterTable() {
+    var selectBox = document.getElementById('appFilter');
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    var table = document.getElementById('serviceTable');
+    var tr = table.getElementsByTagName('tr');
+
+    for (var i = 0; i < tr.length; i++) {
+        var td = tr[i].getElementsByTagName('td')[0];
+        if (td) {
+            var appValue = td.textContent || td.innerText;
+            if (selectedValue === 'all' || appValue.toUpperCase().includes(selectedValue.toUpperCase())) {
+                tr[i].style.display = '';
+            } else {
+                tr[i].style.display = 'none';
+            }
+        }
+    }
+}
