@@ -188,3 +188,61 @@ function filterTable() {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+const http = require('http');
+const fs = require('fs');
+const servicesProd = fs.readFileSync('servicesProd.json');
+const servicesStg = fs.readFileSync('servicesStg.json');
+const servicesQA = fs.readFileSync('servicesQA.json');
+const servicesDev = fs.readFileSync('servicesDev.json');
+const settings = JSON.parse(fs.readFileSync('settings.json'));
+const purecss = fs.readFileSync('./public/pure.css', 'utf8');
+const favicon = fs.readFileSync('./public/favicon.ico');
+const html = require('./lib/htmlhelperV2');
+
+// ... (all your previous functions like addStatusTags, fullURL, makeRequest, etc.)
+
+function filterServicesByApplication(servicesArray, applicationType) {
+    return servicesArray.filter(service => service.application === applicationType);
+}
+
+// ... (rest of your existing functions)
+
+// Update genServiceStatusTable to accept an application type for filtering
+function genServiceStatusTable(servicesArray, applicationType) {
+    let filteredServices = applicationType ? filterServicesByApplication(servicesArray, applicationType) : servicesArray;
+    
+    // ... (rest of your genServiceStatusTable logic)
+}
+
+// ... (rest of your code)
+
+http.createServer((req, res) => {
+    // ... (existing switch cases)
+
+    // New route for filtering by application type
+    case '/filter':
+        // Extract the application type from the query parameter
+        const urlParts = req.url.split('?');
+        const queryParams = new URLSearchParams(urlParts[1]);
+        const applicationType = queryParams.get('app'); // 'act' or 'acs'
+
+        res.end(html.Html(
+            html.Head(html.Style(purecss)) +
+            html.Title("Filtered Services") +
+            html.Body(genNavBar() + genServiceStatusTable(services, applicationType))
+        ));
+        break;
+
+    // ... (rest of your switch cases)
+}).listen(settings.httpPort, () => {
+    console.log(`Server running on host http://localhost:${settings.httpPort}`);
+});
