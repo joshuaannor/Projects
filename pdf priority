@@ -1,0 +1,161 @@
+Priorities 02:11 PM
+11/17/2023
+Page 1 of 3
+Priority
+Automate Release Pipeline: Automate Release Pipeline using tools like Jenkins, GitHub, and Dynatrace
+integration.
+Description
+To implement a CI process for Release as Code that extracts YAML templates from Release and move
+them through a pipeline for Developers
+Using ACT Release templates implement a Release delivery pipeline for Dev, QA and Production
+Key concepts: • GitHub
+• Jenkins
+• Release
+• YMAL- Release 22.1.1 Release file scripting language
+• Deploy Dictionaries • Postman
+Due Date 12/01/2023
+Milestones
+Milestone Due Date Status
+Employee
+Rating Completed
+Comment
+History
+Date Updated By Updated In Field Updated New Value Prior
+Value
+09/27/2023 04:23 PM Joshua Annor
+(223118717)
+Manage Priorities:
+Joshua Annor
+(223118717)
+Priority Automate Release
+Pipeline: Automate
+Release Pipeline using
+tools like Jenkins,
+GitHub, and Dynatrace
+integration.
+Description To implement a CI
+process for Release as
+Code that extracts YAML
+templates from Release
+and move them through
+a pipeline for Developers
+Using ACT Release
+templates implement a
+Release delivery pipeline
+for Dev, QA and
+Production
+Key concepts: • GitHub
+• Jenkins
+• Release
+• YMAL- Release 22.1.1
+Release file scripting
+language
+• Deploy Dictionaries •
+Postman
+Due Date 12/01/2023
+Priorities 02:11 PM
+11/17/2023
+Page 2 of 3
+Priority
+Node.js inventory Microservices Implementation: Setting up and successfully implementing these services
+Description
+Key concepts: 1. Software Build process - GITHub, Jenkins, Deploy, security scans
+2. Node JS - micro services
+3. Integration into Release WebHook
+Developing, testing, and deploying them using GitHub, Jenkins and postman along with other relevant
+tools
+Due Date 12/01/2023
+Milestones
+Milestone Due Date Status
+Employee
+Rating Completed
+Comment
+History
+Date Updated By Updated In Field Updated New Value Prior
+Value
+09/27/2023 04:28 PM Joshua Annor
+(223118717)
+Manage Priorities:
+Joshua Annor
+(223118717)
+Priority Node.js inventory
+Microservices
+Implementation: Setting
+up and successfully
+implementing these
+services
+Description Key concepts: 1.
+Software Build process -
+GITHub, Jenkins,
+Deploy, security scans
+2. Node JS - micro
+services
+3. Integration into
+Release WebHook
+Developing, testing, and
+deploying them using
+GitHub, Jenkins and
+postman along with other
+relevant tools
+Due Date 12/01/2023
+Priority
+OSM Agent Central Control : the template is based on two existing templates: OneAgent Delivery and
+Configuration and OneAgent Release
+Create a new Release template based on the OneAgent Delivery and Configuration and OneAgent
+Release pipeline templates. This new template will be used to allow any BatchFileCopy script to be
+delivered to the Central OSM agent for either the Fleet Delivery or to a specific OSM.
+Description
+Priorities 02:11 PM
+11/17/2023
+Page 3 of 3
+Key concepts:
+1. Artifactory - Contains the BatchFileCopy scripts
+2. Release and Deploy
+3. OSM Agent and Central Agent
+4. External Service call to start the Releas
+Due Date 12/01/2023
+Milestones
+Milestone Due Date Status
+Employee
+Rating On Track
+Comment
+History
+Date Updated By Updated In Field Updated New Value Prior
+Value
+09/27/2023 04:34 PM Joshua Annor
+(223118717)
+Manage Priorities:
+Joshua Annor
+(223118717)
+Priority OSM Agent Central
+Control : the template is
+based on two existing
+templates: OneAgent
+Delivery and
+Configuration and
+OneAgent Release
+Description Create a new Release
+template based on the
+OneAgent Delivery and
+Configuration and
+OneAgent Release
+pipeline templates. This
+new template will be
+used to allow any
+BatchFileCopy script to
+be delivered to the
+Central OSM agent for
+either the Fleet Delivery
+or to a specific OSM.
+Key concepts:
+1. Artifactory - Contains
+the BatchFileCopy
+scripts
+2. Release and Deploy
+3. OSM Agent and
+Central Agent
+4. External Service call
+to start the Releas
+Due Date 12/01/2023
+Employee Summary
+Comment
