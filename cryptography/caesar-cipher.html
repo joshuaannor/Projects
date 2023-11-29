@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher - Cryptography Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-to.html">How To</a></li>
+            <li><a href="caesar-cipher.html">Caesar Cipher</a></li>
+            <li><a href="aes-encryption.html">AES Encryption</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>Caesar Cipher</h2>
+        <textarea id="caesar-input" placeholder="Enter text"></textarea>
+        <input type="number" id="shift" placeholder="Shift">
+        <button onclick="caesarEncrypt()">Encrypt</button>
+        <button onclick="caesarDecrypt()">Decrypt</button>
+        <textarea id="caesar-output" placeholder="Result" readonly></textarea>
+    </div>
+
+    <script src="pure.js"></script>
+</body>
+</html>

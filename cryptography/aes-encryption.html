@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption - Cryptography Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-to.html">How To</a></li>
+            <li><a href="caesar-cipher.html">Caesar Cipher</a></li>
+            <li><a href="aes-encryption.html">AES Encryption</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>AES Encryption and Decryption</h2>
+        <!-- AES Encryption -->
+        <div class="aes-section">
+            <h3>Encrypt with AES</h3>
+            <textarea id="aes-plaintext" placeholder="Enter plaintext"></textarea>
+            <input type="text" id="aes-key" placeholder="Enter a 16/24/32-byte key">
+            <button onclick="encryptAES()">Encrypt</button>
+            <textarea id="aes-encrypted" placeholder="Encrypted text will appear here" readonly></textarea>
+        </div>
+         <!-- AES Decryption -->
+         <div class="aes-section">
+            <h3>Decrypt with AES</h3>
+            <textarea id="aes-ciphertext" placeholder="Enter ciphertext"></textarea>
+            <input type="text" id="aes-key-decrypt" placeholder="Enter the key used for encryption">
+            <button onclick="decryptAES()">Decrypt</button>
+            <textarea id="aes-decrypted" placeholder="Decrypted text will appear here" readonly></textarea>
+        </div>
+    </div>
+
+    <script src="pure.js"></script>
+</body>
+</html>
